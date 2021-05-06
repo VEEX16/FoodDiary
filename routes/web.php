@@ -25,4 +25,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
+Route::get('/collectData', function () { return view('collectData'); })->name('collectData');
+Route::post('/collectData', [CalculationsController::class, 'collectData'])->name('collectData');
+
 require __DIR__.'/auth.php';

@@ -1,14 +1,16 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
-class CalculationsController extends Controller
+class RegisteredUserController extends Controller
 {
     /**
      * Display the registration view.
@@ -28,7 +30,7 @@ class CalculationsController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function collectData(Request $request)
     {
         $request->validate([
             'name' => 'required|string|max:255|unique:users',
@@ -43,10 +45,6 @@ class CalculationsController extends Controller
             'sex' => $request->sex,
             'password' => Hash::make($request->password),  
         ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
