@@ -1,12 +1,43 @@
 (function($) {
 	'use strict';
 	$(function() {
+
+		let protein = ((document.getElementById("protein").innerText.replace('%',"")));
+		if(protein < 10 && protein > 0){
+			protein = "0.0"+protein;
+		}else if(protein < 100){
+			protein = "0."+protein;
+		}
+
+		let fat = ((document.getElementById("fat").innerText.replace('%',"")));
+		if(fat < 10 && fat > 0){
+			fat = "0.0"+fat;
+		}else if(fat < 100){
+			fat = "0."+fat;
+		}
+
+		let carbohydrates = ((document.getElementById("carbohydrates").innerText.replace('%',"")));
+		if(carbohydrates < 10 && carbohydrates > 0){
+			carbohydrates = "0.0"+carbohydrates;
+		}else if(carbohydrates < 100){
+			carbohydrates = "0."+carbohydrates;
+		}
+
+		let calories = ((document.getElementById("calories").innerText.replace('%',"")));
+		if(calories < 10 && calories > 0){
+			calories = "0.0"+calories;
+		}else if(calories < 100){
+			calories = "0."+calories;
+		}
+
+	
+
 		if ($(".dashboard-progress-1").length) {
 			$('.dashboard-progress-1').circleProgress({
-				value: 0.70,
+				value: protein,
 				size: 125,
 				thickness: 7,
-				startAngle: 80,
+				startAngle: 0,
 				fill: {
 					gradient: ["#7922e5", "#1579ff"]
 				}
@@ -14,10 +45,10 @@
 		}
 		if ($(".dashboard-progress-1-dark").length) {
 			$('.dashboard-progress-1-dark').circleProgress({
-				value: 0.70,
+				value: protein,
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				emptyFill: '#eef0fa',
 				fill: {
 					gradient: ["#7922e5", "#1579ff"]
@@ -27,10 +58,10 @@
 
 		if ($(".dashboard-progress-2").length) {
 			$('.dashboard-progress-2').circleProgress({
-				value: 0.60,
+				value: fat,
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				fill: {
 					gradient: ["#429321", "#b4ec51"]
 				}
@@ -38,10 +69,10 @@
 		}
 		if ($(".dashboard-progress-2-dark").length) {
 			$('.dashboard-progress-2-dark').circleProgress({
-				value: 0.60,
+				value: (('0.'+document.getElementById("fat").innerText.replace('%',""))),
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				emptyFill: '#eef0fa',
 				fill: {
 					gradient: ["#429321", "#b4ec51"]
@@ -51,10 +82,10 @@
 
 		if ($(".dashboard-progress-3").length) {
 			$('.dashboard-progress-3').circleProgress({
-				value: 0.90,
+				value: carbohydrates,
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				fill: {
 					gradient: ["#f76b1c", "#fad961"]
 				}
@@ -62,10 +93,10 @@
 		}
 		if ($(".dashboard-progress-3-dark").length) {
 			$('.dashboard-progress-3-dark').circleProgress({
-				value: 0.90,
+				value: (('0.'+document.getElementById("carbohydrates").innerText.replace('%',""))),
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				emptyFill: '#eef0fa',
 				fill: {
 					gradient: ["#f76b1c", "#fad961"]
@@ -75,10 +106,10 @@
 
 		if ($(".dashboard-progress-4").length) {
 			$('.dashboard-progress-4').circleProgress({
-				value: 0.45,
+				value: calories,
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				fill: {
 					gradient: ["#9f041b", "#f5515f"]
 				}
@@ -86,10 +117,10 @@
 		}
 		if ($(".dashboard-progress-4-dark").length) {
 			$('.dashboard-progress-4-dark').circleProgress({
-				value: 0.45,
+				value: (('0.'+document.getElementById("calories").innerText.replace('%',""))),
 				size: 125,
 				thickness: 7,
-				startAngle: 10,
+				startAngle: 0,
 				emptyFill: '#eef0fa',
 				fill: {
 					gradient: ["#9f041b", "#f5515f"]
@@ -919,11 +950,22 @@
 		}
 
 		if ($("#page-view-analytic").length) {
+			let points = JSON.parse($("#points").val());
+			
+			let lastMonth = new Array(29).fill(null);
+
+			
+			for(let i = 0; i<points.length; i++){
+				lastMonth[i] = points[i].points;
+			}
+
+			console.log(lastMonth);
+	
 			var pageiVewAnalyticData = {
-				labels: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28"],
+				labels: ["Dziś", "Wczoraj", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "26", "27", "28", "29", "30", "Miesiąc temu"],
 				datasets: [{
-						label: 'This week',
-						data: [46, 49, 51, 58, 63.61, 65, 64, 69, 70, 78, 80, 80, 90, 85, 87, 92, 97, 102, 107, 109, 111, 111, 120, 130, 132, 136, 140, 145],
+						label: 'Punkty',
+						data: lastMonth,
 						backgroundColor: [
 							'rgba(216,247,234, 0.19)',
 						],
@@ -937,22 +979,6 @@
 						pointBorderWidth: 2,
 						pointRadius: 4,
 					},
-					{
-						label: 'Current week',
-						data: [16, 19, 21, 28, 33.31, 35, 34, 39, 40, 48, 50, 50, 51, 55, 57, 62, 67, 69, 68, 70, 72, 75, 74, 80, 79, 80, 84, 90],
-						backgroundColor: [
-							'rgba(216,247,234, 0.19)',
-						],
-						borderColor: [
-							'#3dd597'
-						],
-						borderWidth: 2,
-						fill: false,
-						pointBorderColor: "#fff",
-						pointBackgroundColor: "#0162ff",
-						pointBorderWidth: 2,
-						pointRadius: 4,
-					}
 				],
 			};
 			var pageiVewAnalyticOptions = {
