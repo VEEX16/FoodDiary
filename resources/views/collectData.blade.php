@@ -47,17 +47,17 @@
                 <form class="pt-3" method="POST" action="{{ route('collectData') }}">
                   @csrf
                   <div class="form-group">
-                    <input type="number" name="name" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Wiek" required>
+                    <input type="number" name="age" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Wiek" required>
                   </div>
                   <div class="form-group">
-                    <input type="number" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Waga" required>
+                    <input type="number" name="weight" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Waga" required>
                   </div>
                   <div class="form-group">
-                    <input type="number" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Wzrost" required>
+                    <input type="number" name="height" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Wzrost" required>
                   </div>
                   <div class="form-group" style="margin-bottom: 5px;">
                     <label for="cars" class="text-dark"><h4>Poziom aktywności fizycznej:</h4></label>
-                    <select name="cars" id="cars">
+                    <select name="activityLevel" id="cars">
                       <option value="1">Brak</option>
                       <option value="2">Niewielka</option>
                       <option value="3">Umiarkowana</option>
@@ -66,7 +66,7 @@
                   </div>
                   <div class="form-group" style="margin-bottom: 5px;">
                     <label for="cars" class="text-dark"><h4>Cel:</h4></label>
-                    <select name="cars" id="cars">
+                    <select name="aim" id="cars">
                       <option value="1">Schudnąć</option>
                       <option value="2">Utrzymać wagę</option>
                       <option value="3">Przytyć</option>
